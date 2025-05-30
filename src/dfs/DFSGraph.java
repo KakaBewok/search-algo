@@ -2,7 +2,7 @@ import java.util.*;
 
 public class DFSGraph {
 
-    private final LinkedList<Integer> adj[]; // Adjacency List
+    private final LinkedList<Integer>[] adj; // Adjacency List
     private final int V; // Jumlah Vertex/Node
 
     public DFSGraph(int v) {

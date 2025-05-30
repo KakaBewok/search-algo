@@ -2,7 +2,7 @@ import java.util.*;
 
 public class BFSGraph {
 
-    private final LinkedList<Integer> adj[]; // Adjacency List
+    private final LinkedList<Integer>[] adj; // Adjacency List
     private final int V; // Jumlah Vertex/Node
 
     public BFSGraph(int v) {
@@ -33,14 +33,14 @@ public class BFSGraph {
 
         boolean targetFound = false;
 
-        while (queue.size() != 0) {
+        while (!queue.isEmpty()) {
             int current = queue.poll();
             System.out.println("Mengunjungi Node " + getNodeName(current));
 
             if (current == targetNode) { // Cek apakah node saat ini adalah targetNode
                 System.out.println("-------------------------------------");
                 System.out.println("TARGET DITEMUKAN: " + getNodeName(targetNode) + " (Node " + targetNode + ")");
-                System.out.println("Path yang dilalui: " + buildPath(parentMap, startNode, current));
+                System.out.println("Path yang dilalui: " + buildPath(parentMap, current));
                 System.out.println("-------------------------------------");
                 targetFound = true;
                 break;
@@ -67,11 +67,11 @@ public class BFSGraph {
     }
 
     // Helper untuk membangun path dari parentMap
-    private List<String> buildPath(Map<Integer, Integer> parentMap, int startNode, int endNode) {
+    private List<String> buildPath(Map<Integer, Integer> parentMap, int endNode) {
         List<String> path = new ArrayList<>();
         int current = endNode;
         while (current != -1) {
-            path.add(getNodeName(current)); // Tambahkan nama node, bukan nilai
+            path.add(getNodeName(current)); // Tambahkan nama node
             current = parentMap.get(current);
         }
         Collections.reverse(path);

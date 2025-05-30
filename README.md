@@ -14,7 +14,7 @@ Bayangkan kita sedang menjelajahi labirin. Dengan DFS, kita akan memilih satu ja
 Konsep BFS:
 Breadth-First Search (BFS) adalah algoritma untuk melintasi atau mencari struktur data pohon atau graf. Algoritma ini memulai di root (atau node sembarang) dan menjelajahi semua node tetangga di tingkat yang sama sebelum bergerak ke node di tingkat berikutnya.
 Analogi:
-Kembali ke labirin. Dengan BFS, kita akan menelusuri labirin lapis demi lapis. kita menjelajahi semua persimpangan yang dapat dijangkau dari lokasi kita saat ini (tingkat 1), lalu dari semua persimpangan itu kita menjelajahi semua persimpangan yang bisa dijangkau (tingkat 2), dan seterusnya. Ini seperti gelombang yang menyebar dari titik awal.
+Dengan BFS, kita akan menelusuri labirin lapis demi lapis. kita menjelajahi semua persimpangan yang dapat dijangkau dari lokasi saat ini (tingkat 1), lalu dari semua persimpangan itu kita menjelajahi semua persimpangan yang bisa dijangkau (tingkat 2), dan seterusnya. Ini seperti gelombang yang menyebar dari titik awal.
 
 \*PERBANDINGAN DFS vs BFS
 
@@ -44,6 +44,16 @@ Kembali ke labirin. Dengan BFS, kita akan menelusuri labirin lapis demi lapis. k
    a7 (6) a7 (6)
 
 \*TAHAPAN PROSES DFS:
+Secara garis besar:
+
+- Mulai: Pilih satu titik awal (node).
+- Jelajah Mendalam: Dari titik saat ini, pilih salah satu jalur yang belum pernah lewati dan ikuti jalur itu sejauh mungkin ke depan.
+- Tandai: Setiap kali mengunjungi node baru, tandai bahwa node itu sudah dikunjungi (supaya tidak bolak-balik ke tempat yang sama atau terjebak putaran).
+- Cari Target: Setiap kali tiba di node baru, periksa apakah itu adalah yang dicari.
+- Jalan Buntu/Sudah Dikunjungi: Jika sampai di node yang tidak punya jalur baru (semua tetangga sudah dikunjungi atau tidak ada tetangga), mundur (backtrack) ke node sebelumnya.
+- Ulangi: Dari node tempat mundur, cari lagi jalur lain yang belum dilewati dan ulangi langkah 2-5 sampai target ditemukan atau semua jalur sudah dijelajahi.
+
+Detail:
 
 1. DFS(0, 6) dipanggil.
 2. DFSUtil(0, visited, 6, [])
@@ -71,6 +81,15 @@ Kembali ke labirin. Dengan BFS, kita akan menelusuri labirin lapis demi lapis. k
    - DFSUtil(0, ...) menerima true. Proses berhenti.
 
 \*TAHAPAN PROSES BFS:
+Secara garis besar:
+
+- Mulai & Antrikan: Pilih satu titik awal (node) dan masukkan ke "antrean" (seperti daftar tunggu). Tandai sudah dikunjungi.
+- Ambil & Periksa: Ambil node paling depan dari antrean. Periksa apakah itu yang cari.
+- Jelajah Tetangga: Lihat semua tetangga dari node yang baru saja ambil.
+- Antrikan Tetangga Baru: Untuk setiap tetangga yang belum pernah dikunjungi, tandai sebagai dikunjungi dan masukkan ke bagian belakang antrean.
+- Ulangi: Terus ulangi langkah 2-4 sampai antrean kosong (berarti semua yang bisa dijangkau sudah dijelajahi) atau target ditemukan.
+
+Detail:
 
 1. BFS(0, 6) dipanggil.
 2. Inisialisasi: visited semua false, queue = [], parentMap = {}.
@@ -125,3 +144,19 @@ Kembali ke labirin. Dengan BFS, kita akan menelusuri labirin lapis demi lapis. k
     - a7 ADALAH a7!
     - Output: "TARGET DITEMUKAN: a7 (Node 6)", "Path yang dilalui: [a1, a2, a4, a7]".
     - targetFound = true. break.
+
+#SCRIPT MENJALANKAN PROGRAM
+
+BFS:
+-compile
+cd src
+javac bfs/BFSGraph.java
+-running
+java bfs/BFSGraph.java
+
+DFS:
+-compile
+cd src
+javac dfs/DFSGraph.java
+-running
+java dfs/DFSGraph.java
